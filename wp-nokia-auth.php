@@ -85,8 +85,6 @@ class WPNokiaAuth extends WPPluginBase {
 		$this->admin_upgrade ();
 		
 		$app_id = $this->get_option ('app_id');
-		global $wplogger;
-		$wplogger->log ('admin_init: app_id = "' . $app_id . '"');
 		if (empty ($app_id)) {
 			$this->hook ('admin_notices');
 		}

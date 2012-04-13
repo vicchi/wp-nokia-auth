@@ -23,6 +23,7 @@ Settings and options include:
 1. You can install WP Nokia Auth automatically from the WordPress admin panel. From the Dashboard, navigate to the *Plugins / Add New* page and search for *"WP Nokia Auth"* and click on the *"Install Now"* link.
 1. Or you can install WP Nokia Auth manually. Download the plugin Zip archive and uncompress it. Copy or upload the `wp-nokia-auth` folder to the `wp-content/plugins` folder on your web server.
 1. Activate the plugin. From the Dashboard, navigate to Plugins and click on the *"Activate"* link under the entry for WP Nokia Auth.
+1. Configure your credentials; from the Dashboard, navigate to the *Settings / WP Nokia Auth* page or click on the *"Settings"* link from the Plugins page on the Dashboard.
 1. Enter your registered Nokia Location API application ID, token and secret; from the Dashboard, navigate to the *Settings / WP Nokia Auth* page or click on the *"Settings"* link from the Plugins page on the Dashboard.
 1. Click on the *"Save Changes"* button to preserve your chosen settings and options.
 

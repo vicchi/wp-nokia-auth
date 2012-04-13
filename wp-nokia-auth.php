@@ -214,7 +214,7 @@ class WPNokiaAuth extends WP_PluginBase {
 			$content = sprintf (
 				__('You need to add your Nokia Location API authentication details to WP Nokia  Auth; you can go to the <a href="%s">WP Nokia Auth Settings And Options page</a> to do this now'),
 				admin_url ('options-general.php?page=wp-nokia-auth/wp-nokia-auth.php'));
-			echo '<div class="wp-nokia-auth-error">' . $content . '</div>';
+			echo '<div class="error">' . $content . '</div>';
 		}
 	}
 	

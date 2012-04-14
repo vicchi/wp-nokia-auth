@@ -14,7 +14,7 @@ This plugin allows you to manage your registered Nokia Location API credentials 
 
 Settings and options include:
 
-1. Managing and maintaining your registered application ID, application token and application secret.
+1. Managing and maintaining your registered application ID and application token.
 1. Sample code incorporating your authentication tokens ready for copying and pasting into your code.
 1. A PHP helper class, `WPNokiaAuthHelper` to allow you to easily gain access to the code you need to authenticate with the Nokia Location APIs and incorporate this into the PHP and/or JavaScript code for your WordPress theme or plugin.
 
@@ -24,7 +24,7 @@ Settings and options include:
 1. Or you can install WP Nokia Auth manually. Download the plugin Zip archive and uncompress it. Copy or upload the `wp-nokia-auth` folder to the `wp-content/plugins` folder on your web server.
 1. Activate the plugin. From the Dashboard, navigate to Plugins and click on the *"Activate"* link under the entry for WP Nokia Auth.
 1. Configure your credentials; from the Dashboard, navigate to the *Settings / WP Nokia Auth* page or click on the *"Settings"* link from the Plugins page on the Dashboard.
-1. Enter your registered Nokia Location API application ID, token and secret; from the Dashboard, navigate to the *Settings / WP Nokia Auth* page or click on the *"Settings"* link from the Plugins page on the Dashboard.
+1. Enter your registered Nokia Location API application ID and token; from the Dashboard, navigate to the *Settings / WP Nokia Auth* page or click on the *"Settings"* link from the Plugins page on the Dashboard.
 1. Click on the *"Save Changes"* button to preserve your chosen settings and options.
 
 == Frequently Asked Questions ==

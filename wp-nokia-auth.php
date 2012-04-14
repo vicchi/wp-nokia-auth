@@ -20,6 +20,7 @@ class WPNokiaAuth extends WP_PluginBase {
 	static $instance;
 	
 	const VERSION = 10;
+	const DISPLAY_VERSION = 'v1.0';
 	const OPTIONS = 'wp_nokia_auth_settings';
 	const ID = 'wp-nokia-auth';
 	
@@ -123,7 +124,7 @@ class WPNokiaAuth extends WP_PluginBase {
 			$settings = apply_filters ('wp_nokia_auth_default_settings',
 				array (
 					'installed' => 'on',
-					'version' => VERSION,
+					'version' => self::VERSION,
 					'app_id' => '',
 					'app_token' => '',
 					'app_secret' => ''
@@ -172,7 +173,7 @@ class WPNokiaAuth extends WP_PluginBase {
 		$settings = $this->get_option ();
 		if (is_array ($settings) &&
 				!empty ($settings['version']) &&
-				$settings['version'] == VERSION) {
+				$settings['version'] == self::VERSION) {
 			return;
 		}
 		
@@ -191,7 +192,7 @@ class WPNokiaAuth extends WP_PluginBase {
 			
 			switch ($current_plugin_version) {
 				case '00':
-					$settings['version'] = VERSION;
+					$settings['version'] = self::VERSION;
 					$upgrade_settings = true;
 					
 				default:
@@ -276,24 +277,24 @@ class WPNokiaAuth extends WP_PluginBase {
 	function admin_display_settings () {
 		$settings = $this->admin_save_settings ();
 		
-		$wrapped_content = '';
-		$auth_content = '';
-		$maps_content = '';
-		$places_content = '';
+		$wrapped_content = array ();
+		$auth_content = array ();
+		$maps_content = array ();
+		$places_content = array ();
 	
-		$auth_content .= '<p><strong>' . __('Overview') . '</strong><br />'
+		$auth_content[] = '<p><strong>' . __('Overview') . '</strong><br />'
 			. sprintf (__('You can obtain Nokia Location API credentials from the <a href="%s">Nokia API Registration</a> site.'), 'http://api.developer.nokia.com/')
 			. '</p>';
 			
-		$auth_content .= '<p><strong>' . __('Application ID') . '</strong><br />
+		$auth_content[] = '<p><strong>' . __('Application ID') . '</strong><br />
 			<input type="text" name="wp_nokia_app_id" id="wp_nokia_app_id" value="' . $settings['app_id'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App ID') . '</small></p>';
 			
-		$auth_content .= '<p><strong>' . __('Application Token') . '</strong><br />
+		$auth_content[] = '<p><strong>' . __('Application Token') . '</strong><br />
 			<input type="text" name="wp_nokia_app_token" id="wp_nokia_app_token" value="' . $settings['app_token'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App Token') . '</small></p>';
 			
-		$auth_content .= '<p><strong>' . __('Application Secret') . '</strong><br />
+		$auth_content[] = '<p><strong>' . __('Application Secret') . '</strong><br />
 			<input type="text" name="wp_nokia_app_secret" id="wp_nokia_app_secret" value="' . $settings['app_secret'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App Secret') . '</small></p>';
 
@@ -303,40 +304,42 @@ class WPNokiaAuth extends WP_PluginBase {
 			$helper = new WPNokiaAuthHelper;
 			$context = $helper->get_maps_context (true);
 			
-			$maps_content .= '<p>'
+			$maps_content[] = '<p>'
 				. __('To use your Nokia Location API authentication tokens simply copy and paste the code below into your WordPress theme or plugin. Alternatively you can use the <code>WPNokiaAuthHelper</code> PHP class that ships with this plugin; see <code>wp-nokia-auth-helper.php</code> for more information.')
 				. '</p>';
 				
-			$maps_content .= '<textarea class="wp-nokia-auth-code" cols="70" rows="8">' . htmlspecialchars ($context) . '</textarea>';
+			$maps_content[] = '<textarea class="wp-nokia-auth-code" cols="70" rows="8">' . htmlspecialchars ($context) . '</textarea>';
 			
-			$places_content .= '<p>'
+			$places_content[] = '<p>'
 				. __('The Nokia Places Javascript API does not currently require authentication.')
 				. '</p>';
 		}
 
 		if (function_exists ('wp_nonce_field')) {
-			$wrapped_content .= wp_nonce_field (
+			$wrapped_content[] = wp_nonce_field (
 				'wp-nokia-auth-update-options',
 				'_wpnonce',
 				true,
 				false);
 		}
 		
-		$wrapped_content .= $this->admin_postbox ('wp-nokia-auth-settings',
+		$wrapped_content[] = $this->admin_postbox ('wp-nokia-auth-settings',
 			__('Nokia Location APIs Registration Information'),
-			$auth_content);
+			implode ('', $auth_content));
 			
 		if (!empty ($maps_content)) {
-			$wrapped_content .= $this->admin_postbox ('wp-nokia-auth-maps-context',
+			$wrapped_content[] = $this->admin_postbox ('wp-nokia-auth-maps-context',
 				__('Nokia Maps API Authentication Context'),
-				$maps_content);
+				implode ('', $maps_content));
 			
-			$wrapped_content .= $this->admin_postbox ('wp-nokia-auth-places-context',
+			$wrapped_content[] = $this->admin_postbox ('wp-nokia-auth-places-context',
 				__('Nokia Places API Authentication Context'),
-				$places_content);
+				implode ('', $places_content));
 		}
 			
-		$this->admin_wrap (__('WP Nokia Auth Settings And Options'), $wrapped_content);
+		$this->admin_wrap (
+			sprintf (__('WP Nokia Auth %s - Settings And Options'), self::DISPLAY_VERSION),
+				implode ('', $wrapped_content));
 	}
 	
 	/**

@@ -126,8 +126,7 @@ class WPNokiaAuth extends WP_PluginBase {
 					'installed' => 'on',
 					'version' => self::VERSION,
 					'app_id' => '',
-					'app_token' => '',
-					'app_secret' => ''
+					'app_token' => ''
 					)
 				);
 			update_option (self::OPTIONS, $settings);
@@ -283,7 +282,7 @@ class WPNokiaAuth extends WP_PluginBase {
 		$places_content = array ();
 	
 		$auth_content[] = '<p><strong>' . __('Overview') . '</strong><br />'
-			. sprintf (__('You can obtain Nokia Location API credentials from the <a href="%s">Nokia API Registration</a> site.'), 'http://api.developer.nokia.com/')
+			. sprintf (__('You can obtain Nokia Location API credentials from the <a href="%s" target="_blank">Nokia API Registration</a> site.'), 'http://api.developer.nokia.com/')
 			. '</p>';
 			
 		$auth_content[] = '<p><strong>' . __('Application ID') . '</strong><br />
@@ -294,13 +293,7 @@ class WPNokiaAuth extends WP_PluginBase {
 			<input type="text" name="wp_nokia_app_token" id="wp_nokia_app_token" value="' . $settings['app_token'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App Token') . '</small></p>';
 			
-		$auth_content[] = '<p><strong>' . __('Application Secret') . '</strong><br />
-			<input type="text" name="wp_nokia_app_secret" id="wp_nokia_app_secret" value="' . $settings['app_secret'] . '" size="35" /><br />
-			<small>' . __('Enter your registered Nokia Location API App Secret') . '</small></p>';
-
-		if (!empty ($settings['app_id']) &&
-				!empty ($settings['app_token']) &&
-				!empty ($settings['app_secret'])) {
+		if (!empty ($settings['app_id']) && !empty ($settings['app_token'])) {
 			$helper = new WPNokiaAuthHelper;
 			$context = $helper->get_maps_context (true);
 			
@@ -366,7 +359,6 @@ class WPNokiaAuth extends WP_PluginBase {
 						
 				$settings['app_id'] = html_entity_decode ($this->admin_option ('wp_nokia_app_id'));
 				$settings['app_token'] = html_entity_decode ($this->admin_option ('wp_nokia_app_token'));
-				$settings['app_secret'] = html_entity_decode ($this->admin_option ('wp_nokia_app_secret'));
 				
 				echo "<div id=\"updatemessage\" class=\"updated fade\"><p>";
 				_e('WP Nokia Auth Settings And Options Updated.');

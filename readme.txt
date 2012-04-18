@@ -4,7 +4,7 @@ Donate Link: http://www.vicchi.org/codeage/donate/
 Tags: wp-nokia-auth, nokia, maps, places, location, api
 Requires at least: 3.3
 Tested up to: 3.3.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 Easily manage your Nokia Location API credentials across all themes and plugins on a site.
 
@@ -60,12 +60,19 @@ Totally; this plugin is licensed under the GNU General Public License v2 (GPLV2)
 
 == Changelog ==
 
-The current version is 1.0 (2012.04.12)
+The current version is 1.0.1 (2012.04.19)
+
+= 1.0.1 =
+Summary: Minor fixes to PHP base class.
+Fixed: An issue with an old version of WP_PluginBase, the PHP class which WP Nokia Auth extends.
 
 = 1.0 =
 * First version of WP Nokia Auth released
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+This is the 2nd version of WP Nokia Auth; fixing an issue with the PHP base class that the code extends.
 
 = 1.0 =
 * This is the first version of WP Nokia Auth

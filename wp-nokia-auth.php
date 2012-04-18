@@ -3,7 +3,7 @@
 Plugin Name: WP Nokia Auth
 Plugin URI: http://www.vicchi.org/codeage/wp-nokia-auth
 Description: A WordPress plugin to manage your Nokia Location API credentials across all themes and plugins on a site.
-Version: 1.0
+Version: 1.0.1
 Author: Gary Gale
 Author URI: http://www.garygale.com/
 License: GPL2
@@ -19,8 +19,8 @@ require_once (WPNOKIAAUTH_PATH . '/wp-nokia-auth-helper.php');
 class WPNokiaAuth extends WP_PluginBase {
 	static $instance;
 	
-	const VERSION = 10;
-	const DISPLAY_VERSION = 'v1.0';
+	const VERSION = 101;
+	const DISPLAY_VERSION = 'v1.0.1';
 	const OPTIONS = 'wp_nokia_auth_settings';
 	const ID = 'wp-nokia-auth';
 	
@@ -191,6 +191,8 @@ class WPNokiaAuth extends WP_PluginBase {
 			
 			switch ($current_plugin_version) {
 				case '00':
+				case '10':
+				case '101':
 					$settings['version'] = self::VERSION;
 					$upgrade_settings = true;
 					
@@ -285,11 +287,11 @@ class WPNokiaAuth extends WP_PluginBase {
 			. sprintf (__('You can obtain Nokia Location API credentials from the <a href="%s" target="_blank">Nokia API Registration</a> site.'), 'http://api.developer.nokia.com/')
 			. '</p>';
 			
-		$auth_content[] = '<p><strong>' . __('Application ID') . '</strong><br />
+		$auth_content[] = '<p><strong>' . __('App ID') . '</strong><br />
 			<input type="text" name="wp_nokia_app_id" id="wp_nokia_app_id" value="' . $settings['app_id'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App ID') . '</small></p>';
 			
-		$auth_content[] = '<p><strong>' . __('Application Token') . '</strong><br />
+		$auth_content[] = '<p><strong>' . __('Token / App Code') . '</strong><br />
 			<input type="text" name="wp_nokia_app_token" id="wp_nokia_app_token" value="' . $settings['app_token'] . '" size="35" /><br />
 			<small>' . __('Enter your registered Nokia Location API App Token') . '</small></p>';
 			
